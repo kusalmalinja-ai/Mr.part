@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>MR.PARTS · Web Developer Portfolio</title>
+    <!-- Google Fonts & simple reset -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 (free icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fafcff;
+            color: #0a1a2f;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        /* custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #e9eef3;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2c3e66;
+            border-radius: 10px;
+        }
+
+        /* container utility */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 32px;
+        }
+
+        /* header / navigation */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 0;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #1e2f4e, #2b4b7c);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .logo span {
+            background: none;
+            color: #0f2b42;
+            font-weight: 700;
+        }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        .nav-links a {
+            text-decoration: none;
+            font-weight: 600;
+            color: #1f3a5f;
+            transition: 0.2s;
+            font-size: 1rem;
+        }
+        .nav-links a:hover {
+            color: #0f5c9e;
+            border-bottom: 2px solid #0f5c9e;
+            padding-bottom: 4px;
+        }
+
+        /* buttons */
+        .btn {
+            display: inline-block;
+            background: #1e3a5f;
+            color: white;
+            padding: 12px 28px;
+            border-radius: 40px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: 0.25s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #1e3a5f;
+            color: #1e3a5f;
+        }
+        .btn-outline:hover {
+            background: #1e3a5f;
+            color: white;
+        }
+        .btn:hover {
+            background: #0f2f50;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+        }
+
+        /* hero section */
+        .hero {
+            padding: 60px 0 40px 0;
+        }
+        .hero-grid {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+        .hero-content {
+            flex: 1;
+            min-width: 260px;
+        }
+        .hero-badge {
+            background: #e9f0fa;
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #1e4a76;
+            margin-bottom: 1rem;
+        }
+        .hero-content h1 {
+            font-size: 3.4rem;
+            font-weight: 800;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+        }
+        .gradient-text {
+            background: linear-gradient(120deg, #1a4972, #2b6a9f);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .hero-content p {
+            font-size: 1.2rem;
+            color: #2c445e;
+            max-width: 520px;
+            margin: 1.2rem 0 2rem;
+        }
+        .hero-buttons {
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+        .hero-image {
+            flex: 0.8;
+            text-align: center;
+            background: #eef3fc;
+            border-radius: 38% 62% 70% 30% / 40% 45% 55% 60%;
+            padding: 20px;
+        }
+        .hero-image i {
+            font-size: 12rem;
+            color: #2c5a84;
+            opacity: 0.9;
+        }
+
+        /* section headings */
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 2.5rem;
+            text-align: center;
+            letter-spacing: -0.3px;
+            position: relative;
+        }
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 70px;
+            height: 4px;
+            background: #2b6a9f;
+            margin: 12px auto 0;
+            border-radius: 4px;
+        }
+
+        /* skills cards */
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.8rem;
+            justify-content: center;
+            margin: 2rem 0 3rem;
+        }
+        .skill-card {
+            background: white;
+            padding: 1.5rem 2rem;
+            border-radius: 32px;
+            box-shadow: 0 10px 25px -8px rgba(0,0,0,0.05);
+            transition: 0.2s;
+            text-align: center;
+            min-width: 130px;
+            border: 1px solid #eef2f8;
+        }
+        .skill-card i {
+            font-size: 2.8rem;
+            color: #1e5a88;
+            margin-bottom: 12px;
+        }
+        .skill-card span {
+            display: block;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        .skill-card:hover {
+            transform: translateY(-5px);
+            border-color: #cbdde9;
+            box-shadow: 0 20px 30px -12px rgba(0,0,0,0.1);
+        }
+
+        /* projects section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 1rem;
+            margin-bottom: 2rem;
+        }
+        .project-card {
+            background: white;
+            border-radius: 28px;
+            overflow: hidden;
+            transition: all 0.3s;
+            box-shadow: 0 12px 24px -12px rgba(0,0,0,0.08);
+            border: 1px solid #eef2fa;
+        }
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 24px 36px -14px rgba(0, 32, 64, 0.12);
+        }
+        .project-img {
+            background: #dce6f0;
+            padding: 2rem 1rem;
+            text-align: center;
+            font-size: 3rem;
+            color: #2c6288;
+        }
+        .project-info {
+            padding: 1.6rem;
+        }
+        .project-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .project-info p {
+            color: #3c5775;
+            margin-bottom: 1.2rem;
+        }
+        .tech-tag {
+            display: inline-block;
+            background: #eaf2f9;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-right: 8px;
+            margin-bottom: 8px;
+            color: #1c5985;
+        }
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 1rem;
+            font-weight: 600;
+            color: #1e5f91;
+            text-decoration: none;
+        }
+
+        /* about + contact mixed */
+        .about-wrap {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3rem;
+            background: #ffffffdd;
+            background: linear-gradient(145deg, #ffffff, #f8fbfe);
+            border-radius: 48px;
+            padding: 2rem 2rem;
+            margin: 2rem 0 2rem;
+            border: 1px solid #eef2fc;
+        }
+        .about-text {
+            flex: 1.2;
+        }
+        .about-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        .about-text p {
+            margin-bottom: 1rem;
+            color: #2c405c;
+        }
+        .contact-info {
+            flex: 0.8;
+            background: #eef3fc;
+            border-radius: 32px;
+            padding: 1.8rem;
+        }
+        .contact-info h4 {
+            font-size: 1.4rem;
+            margin-bottom: 1.2rem;
+        }
+        .contact-detail {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.2rem;
+            font-size: 1rem;
+        }
+        .contact-detail i {
+            width: 32px;
+            font-size: 1.4rem;
+            color: #1e5a88;
+        }
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        .social-links a {
+            background: white;
+            width: 44px;
+            height: 44px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 30px;
+            color: #1e3a5f;
+            font-size: 1.4rem;
+            transition: 0.2s;
+            text-decoration: none;
+        }
+        .social-links a:hover {
+            background: #1e3a5f;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        /* footer */
+        footer {
+            text-align: center;
+            padding: 2rem 0 2.5rem;
+            border-top: 1px solid #e2e9f0;
+            margin-top: 3rem;
+            color: #4a627a;
+        }
+
+        /* dynamic typing effect (JS) */
+        .dynamic-role {
+            font-weight: 700;
+            color: #1f6392;
+            border-right: 2px solid #1f6392;
+            padding-right: 6px;
+            animation: blink 0.7s step-end infinite;
+        }
+        @keyframes blink {
+            0%, 100% { border-color: transparent; }
+            50% { border-color: #1f6392; }
+        }
+
+        /* responsive */
+        @media (max-width: 780px) {
+            .navbar {
+                flex-direction: column;
+            }
+            .hero-content h1 {
+                font-size: 2.3rem;
+            }
+            .hero-grid {
+                flex-direction: column-reverse;
+                text-align: center;
+            }
+            .hero-buttons {
+                justify-content: center;
+            }
+            .about-wrap {
+                flex-direction: column;
+            }
+            .container {
+                padding: 0 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <nav class="navbar">
+            <div class="logo">MR.<span>PARTS</span> <span style="font-size:1rem; background:none; color:#2b5a7a;">// dev</span></div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <!-- Hero Section (home) -->
+    <section id="home">
+        <div class="container hero">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <div class="hero-badge"><i class="fas fa-code"></i> full-stack craft</div>
+                    <h1>Building digital <span class="gradient-text">experiences</span> <br> that matter.</h1>
+                    <p>Hi, I'm <strong>MR.PARTS</strong> — creative web developer focused on interactive, responsive, and high-performance web apps. Let's turn ideas into reality.</p>
+                    <div class="hero-buttons">
+                        <a href="#projects" class="btn"><i class="fas fa-arrow-down"></i> See work</a>
+                        <a href="#contact" class="btn btn-outline"><i class="fas fa-comment"></i> Let's talk</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <i class="fas fa-laptop-code"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills section with tech icons -->
+    <section id="skills">
+        <div class="container">
+            <h2 class="section-title">tech stack & tools</h2>
+            <div class="skills-grid">
+                <div class="skill-card"><i class="fab fa-html5"></i><span>HTML5</span></div>
+                <div class="skill-card"><i class="fab fa-css3-alt"></i><span>CSS3</span></div>
+                <div class="skill-card"><i class="fab fa-js"></i><span>JavaScript</span></div>
+                <div class="skill-card"><i class="fab fa-react"></i><span>React</span></div>
+                <div class="skill-card"><i class="fab fa-node-js"></i><span>Node.js</span></div>
+                <div class="skill-card"><i class="fas fa-database"></i><span>MongoDB</span></div>
+                <div class="skill-card"><i class="fab fa-git-alt"></i><span>Git/GitHub</span></div>
+                <div class="skill-card"><i class="fas fa-mobile-alt"></i><span>Responsive</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects section - dynamic but static initial with JS interactivity later -->
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title">featured projects</h2>
+            <div class="projects-grid" id="projectsGrid">
+                <!-- project cards will be injected by js but also static fallback, better use JS to populate but I can mix -->
+            </div>
+            <div style="text-align: center; margin-top: 10px;">
+                <button id="loadMoreBtn" class="btn btn-outline" style="background:transparent;"><i class="fas fa-sync-alt"></i> view all projects</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- about + contact combined section -->
+    <section id="contact">
+        <div class="container">
+            <div class="about-wrap">
+                <div class="about-text">
+                    <h3><i class="fas fa-user-astronaut"></i> about MR.PARTS</h3>
+                    <p>I'm a passionate web developer with 5+ years of experience crafting pixel-perfect interfaces and robust backends. I believe in clean code, thoughtful design, and user-first experiences.</p>
+                    <p>When I'm not coding, I contribute to open-source, write technical articles, and explore new web technologies. Every project is an opportunity to learn and innovate.</p>
+                    <p><strong>⚡ Currently available for freelance & full-time collaborations.</strong></p>
+                </div>
+                <div class="contact-info">
+                    <h4><i class="fas fa-paper-plane"></i> connect with me</h4>
+                    <div class="contact-detail"><i class="fas fa-envelope"></i> <span>mr.parts@devportfolio.com</span></div>
+                    <div class="contact-detail"><i class="fab fa-github"></i> <span>github.com/mrparts</span></div>
+                    <div class="contact-detail"><i class="fab fa-linkedin"></i> <span>linkedin.com/in/mrparts</span></div>
+                    <div class="contact-detail"><i class="fas fa-phone-alt"></i> <span>+1 (555) 234-8765</span></div>
+                    <div class="social-links">
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="Dribbble"><i class="fab fa-dribbble"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="container">
+        <p>© 2025 MR.PARTS — Designed & developed with <i class="fas fa-heart" style="color:#c44536;"></i> for the web community.</p>
+        <p style="margin-top: 8px; font-size:0.85rem;"><i class="fas fa-code-branch"></i> version 2.0 • always shipping</p>
+    </div>
+</footer>
+
+<script>
+    // ========================
+    // PROJECT DATA (Portfolio)
+    // ========================
+    const projectsData = [
+        {
+            title: "Nebula Dashboard",
+            desc: "Interactive admin panel with real-time analytics, dark mode, and chart visualizations.",
+            tech: ["React", "Tailwind", "Chart.js"],
+            icon: "fas fa-chart-line",
+            demo: "#"
+        },
+        {
+            title: "EcoCart E‑commerce",
+            desc: "Full-stack marketplace with cart, user auth, and Stripe integration.",
+            tech: ["Node.js", "Express", "MongoDB", "Stripe"],
+            icon: "fas fa-store",
+            demo: "#"
+        },
+        {
+            title: "Portfolio 360°",
+            desc: "3D interactive portfolio concept using Three.js and modern animations.",
+            tech: ["Three.js", "GSAP", "CSS Grid"],
+            icon: "fas fa-cube",
+            demo: "#"
+        },
+        {
+            title: "TaskFlow Manager",
+            desc: "Productivity tool with drag & drop, local storage sync and team boards.",
+            tech: ["Vanilla JS", "HTML5", "CSS3", "localStorage"],
+            icon: "fas fa-tasks",
+            demo: "#"
+        },
+        {
+            title: "WeatherWave App",
+            desc: "Real-time weather forecast with geolocation and beautiful UI.",
+            tech: ["JavaScript", "OpenWeather API", "Responsive"],
+            icon: "fas fa-cloud-sun",
+            demo: "#"
+        },
+        {
+            title: "DevBlog CMS",
+            desc: "Lightweight blog CMS with markdown support and code highlighting.",
+            tech: ["React", "Markdown", "Node.js"],
+            icon: "fas fa-blog",
+            demo: "#"
+        }
+    ];
+
+    let currentProjectsCount = 3;  // initially show 3 projects
+    const projectsGrid = document.getElementById('projectsGrid');
+    const loadMoreBtn = document.getElementById('loadMoreBtn');
+
+    function renderProjects(limit) {
+        if (!projectsGrid) return;
+        const toShow = projectsData.slice(0, limit);
+        projectsGrid.innerHTML = '';
+        toShow.forEach(project => {
+            const card = document.createElement('div');
+            card.className = 'project-card';
+            // icon area
+            const iconDiv = document.createElement('div');
+            iconDiv.className = 'project-img';
+            iconDiv.innerHTML = `<i class="${project.icon}" style="font-size: 3.2rem;"></i>`;
+            // info area
+            const infoDiv = document.createElement('div');
+            infoDiv.className = 'project-info';
+            const techSpans = project.tech.map(t => `<span class="tech-tag">${t}</span>`).join('');
+            infoDiv.innerHTML = `
+                <h3>${project.title}</h3>
+                <p>${project.desc}</p>
+                <div>${techSpans}</div>
+                <a href="${project.demo}" class="project-link" target="_blank">Live demo <i class="fas fa-arrow-right"></i></a>
+            `;
+            card.appendChild(iconDiv);
+            card.appendChild(infoDiv);
+            projectsGrid.appendChild(card);
+        });
+    }
+
+    // Load more or reset
+    function handleLoadMore() {
+        if (currentProjectsCount >= projectsData.length) {
+            // if all are showing, optionally reset to 3? But better show all and toggle? Let's reset to initial count =3
+            currentProjectsCount = 3;
+            loadMoreBtn.innerHTML = '<i class="fas fa-expand-alt"></i> show all projects';
+            renderProjects(currentProjectsCount);
+        } else {
+            currentProjectsCount = projectsData.length;
+            renderProjects(currentProjectsCount);
+            loadMoreBtn.innerHTML = '<i class="fas fa-compress-alt"></i> show less';
+        }
+    }
+
+    // reset text if we click again from "show less" to initial
+    function syncButtonText() {
+        if (currentProjectsCount >= projectsData.length) {
+            loadMoreBtn.innerHTML = '<i class="fas fa-compress-alt"></i> show less';
+        } else {
+            loadMoreBtn.innerHTML = '<i class="fas fa-expand-alt"></i> show all projects';
+        }
+    }
+
+    if (loadMoreBtn) {
+        loadMoreBtn.addEventListener('click', () => {
+            if (currentProjectsCount >= projectsData.length) {
+                currentProjectsCount = 3;
+                renderProjects(currentProjectsCount);
+                loadMoreBtn.innerHTML = '<i class="fas fa-expand-alt"></i> show all projects';
+            } else {
+                currentProjectsCount = projectsData.length;
+                renderProjects(currentProjectsCount);
+                loadMoreBtn.innerHTML = '<i class="fas fa-compress-alt"></i> show less';
+            }
+        });
+    }
+
+    // initial render (3 projects)
+    renderProjects(3);
+
+    // Dynamic typing effect for hero (extra JS spark)
+    const createTypingEffect = () => {
+        const heroParagraph = document.querySelector('.hero-content p');
+        if (!heroParagraph) return;
+        const originalText = heroParagraph.innerHTML;
+        // We only want to replace the intro text? better add a dynamic span after name
+        // but not to break existing layout. I will add a small inline span that changes roles.
+        const nameStrong = heroParagraph.querySelector('strong');
+        if (nameStrong) {
+            const roleSpan = document.createElement('span');
+            roleSpan.className = 'dynamic-role';
+            roleSpan.style.display = 'inline-block';
+            roleSpan.style.marginLeft = '6px';
+            const roles = ['React Expert', 'UI Engineer', 'Node Developer', 'Creative Coder'];
+            let idx = 0;
+            function updateRole() {
+                roleSpan.textContent = roles[idx % roles.length];
+                idx++;
+            }
+            updateRole();
+            setInterval(updateRole, 2200);
+            // insert after strong
+            nameStrong.insertAdjacentElement('afterend', document.createTextNode(' — '));
+            nameStrong.insertAdjacentElement('afterend', roleSpan);
+        }
+    };
+
+    // smooth anchor scroll
+    document.querySelectorAll('.nav-links a, .hero-buttons a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if (href && href.startsWith('#')) {
+                e.preventDefault();
+                const targetId = href.substring(1);
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+        });
+    });
+
+    // small hover effect on project demo link (just for fun)
+    function addHoverDemo() {
+        // not needed, but style included
+    }
+
+    // Initialize extra effect
+    window.addEventListener('DOMContentLoaded', () => {
+        createTypingEffect();
+        // Add some style to make active link highlight
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-links a');
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                if (scrollY >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+            navLinks.forEach(link => {
+                link.style.borderBottom = 'none';
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.style.borderBottom = '2px solid #0f5c9e';
+                    link.style.paddingBottom = '4px';
+                } else {
+                    link.style.borderBottom = 'none';
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>
